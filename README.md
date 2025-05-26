@@ -1,5 +1,5 @@
 # CodingStandards
 
-Conding standars workshop for software engeneering 2.
+Conding standars workshop for software engineering 2.
 
 - Nestor Arias
