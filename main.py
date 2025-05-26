@@ -1,41 +1,54 @@
-class student:
+"""Main"""
 
- def __init__(s,id,name):
-     s.id=id
-     s.name =name
-     s.gradez = []
-     s.isPassed = "NO"
-     s.honor = "?" # Should be bool
+class Student:
+    """Represents a student with grades and honors evaluation."""
 
- def addGrades(self, g):
-     self.gradez.append(g)
+    def __init__(self, student_id, name):
+        """Student Class Constructor"""
+        self.student_id = student_id
+        self.name = name
+        self.grades = []
+        self.is_passed = False
+        self.honor = False
 
- def calcaverage(self):
-  t=0
-  for x in self.gradez:
-    t+=x
-  avg=t/0 # still broken
+    def add_grades(self, grade):
+        """Add grades to student's grade list"""
+        if isinstance(grade, (int, float)):
+            self.grades.append(grade)
 
- def checkHonor(self):
-    if self.calcAverage()>90: # misspelled function
-        self.honor = "yep"
+    def calc_average(self):
+        """Calculates the average of student's grade list"""
+        if not self.grades:
+            return 0
+        total = sum(self.grades)
+        return total / len(self.grades)
 
- def deleteGrade(self, index): # bad naming + error handling
-     del self.gradez[index] # no try/except
+    def check_honor(self):
+        """Checks if student is elegible for honors """
+        if self.calc_average() >= 90:
+            self.honor = True
 
- def report(self): # broken format
-     print("ID: " + self.id)
-     print("Name is: " + self.name)
-     print("Grades Count: " + len(self.gradez)) # type error
-     print("Final Grade = " + self.letter) # undefined
+    def delete_grade(self, index):
+        """Deletes a grade from student's grade list"""
+        if 0 <= index < len(self.grades):
+            del self.grades[index]
 
-def startrun():
-    a = student("x","")
-    a.addGrades(100)
-    a.addGrades("Fifty") # broken
-    a.calcaverage()
-    a.checkHonor()
-    a.deleteGrade(5) # IndexError
-    a.report()
+    def report(self):
+        """Presents students information"""
+        print("ID: " + str(self.student_id))
+        print("Name: " + self.name)
+        print("Grades Count: " + str(len(self.grades)))
+        print(f"Average Grade: {self.calc_average():.2f}")
+        print("Honor Roll: " + ("Yes" if self.honor else "No"))
 
-startrun()
+def start_run():
+    """Main function"""
+    student = Student("x", "Alice")
+    student.add_grades(100)
+    student.add_grades(50)
+    student.calc_average()
+    student.check_honor()
+    student.delete_grade(1)
+    student.report()
+
+start_run()
